@@ -2,7 +2,7 @@
 const baseUrl = 'https://api.noroff.dev/api/v1';
 let allJokes = []; // Store all jokes initially
 
-// Fetch all jokes and display setup and type
+// Fetch jokes / display setup / type
 fetchJokes();
 
 function fetchJokes() {
@@ -20,7 +20,7 @@ function fetchJokes() {
     });
 }
 
-// Display jokes in the jokesContainer
+// Display jokes in jokesContainer
 function displayJokes(jokes) {
   const jokesContainer = document.getElementById('jokes-container');
   jokesContainer.innerHTML = '';
@@ -30,14 +30,17 @@ function displayJokes(jokes) {
     const jokeElement = document.createElement('div');
     jokeElement.innerHTML = `<p>${setup} (${type})</p>`;
     const punchlineLink = document.createElement('a');
-    punchlineLink.href = `joke.html?id=${id}`; // Add joke ID to the URL
+    punchlineLink.href = `joke.html?id=${id}`; // Add ID to URL
     punchlineLink.textContent = 'View Punchline';
+    punchlineLink.addEventListener('click', () => {
+      sessionStorage.setItem('jokeId', id); // Store ID in session storage
+    });
     jokeElement.appendChild(punchlineLink);
     jokesContainer.appendChild(jokeElement);
   });
 }
 
-// Filter jokes by type (General or Programming)
+// Filter (General or Programming)
 const filterGeneralBtn = document.getElementById('filter-general');
 const filterProgrammingBtn = document.getElementById('filter-programming');
 

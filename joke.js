@@ -1,17 +1,16 @@
 // joke.html
-const baseUrl = 'https://api.noroff.dev/api/v1';
+const baseUrl = 'https://api.noroff.dev/api/v1/jokes';
 
-// Get joke ID from URL parameter
-const urlParams = new URLSearchParams(window.location.search);
-const jokeId = urlParams.get('id');
+// Get ID from session storage
+const jokeId = sessionStorage.getItem('jokeId');
 
-// Fetch joke details and display them
+// Fetch details and display 
 fetchJokeDetails();
 
 function fetchJokeDetails() {
   const jokeDetailsContainer = document.getElementById('joke-details');
 
-  fetch(`${baseUrl}/jokes/${jokeId}`)
+  fetch(`${baseUrl}/${jokeId}`)
     .then(response => response.json())
     .then(data => {
       const { type, setup, punchline } = data;
